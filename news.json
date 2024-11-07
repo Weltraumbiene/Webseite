@@ -1,0 +1,18 @@
+[
+    {
+      "title": "Cowllector jetzt auch im Browser spielbar!",
+      "date": "2024-11-07",
+      "content": "Nach einiger Überlegung habe ich mich entschieden, GameMaker hinter mir zu lassen und die Anwendung vollständig in JavaScript zu entwickeln. Zwar musste ich bei Null anfangen, da GameMaker und JavaScript wenig gemeinsam haben, aber schließlich habe ich eine funktionierende Grundstruktur für die Engine geschaffen. Es fehlen noch einige Features, wie zum Beispiel eine Menüführung und ein Highscore-System – aber das kommt alles nach und nach!"
+    },
+    {
+      "title": "Neues Feature in Arbeit",
+      "date": "2024-10-30",
+      "content": "Es gibt ein neues Feature, an dem ich arbeite! Zwar gab es einige technische Herausforderungen und ich bin auch zeitlich stark eingespannt, aber ich bin zuversichtlich, dass es bald fertig ist. Geduld zahlt sich aus!"
+    },
+    {
+      "title": "Here we are!",
+      "date": "2024-09-23",
+      "content": "Das Layout für die Seite ist jetzt fertiggestellt! Ich nenne die erste Version mal liebevoll Version 1.01, und die Webseite ist nun online."
+    }
+  ]
+  

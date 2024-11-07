@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ben Claus - Anwendungsentwicklung</title>
+  <link rel="icon" type="image/jpg" sizes="32x32" href="images/favicon.jpg">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="news.css">
+  <script>
+    function zeigeBegruessung() {
+        const heute = new Date();
+        const stunde = heute.getHours();
+        let begruessung = "";
+
+        if (stunde >= 6 && stunde < 12) {
+            begruessung = "Guten Morgen!";
+        } else if (stunde >= 12 && stunde < 18) {
+            begruessung = "Guten Tag!";
+        } else if (stunde >= 18 && stunde < 24) {
+            begruessung = "Guten Abend!";
+        } else {
+            begruessung = "Gute Nacht! Tzzzzz...";
+        }
+
+        document.getElementById("begruesstext").textContent = begruessung;
+    }
+  </script>
+</head>
+<body onload="zeigeBegruessung()">
+
+  <!-- Zentraler Inhaltsbereich -->
+  <div class="layout">
+    <div class="side-strip"></div> <!-- Linker Streifen -->
+
+    <div class="main-content">
+      <!-- Logo hinzufügen -->
+      <div class="header">
+        <a href="index.html">
+          <img src="images/bclogoBG.jpg" alt="BC Logo" class="logo">
+      </a>
+        
+        <!-- Navigation -->
+        <nav>
+          <ul class="menu">
+            <li class="menu-item"><a href="index.html">Start</a></li>
+            <li class="menu-item"><a href="about.html">Über Mich</a></li>
+            <li class="menu-item">
+              <a href="projekte.html">Projekte</a>
+              <ul class="submenu">
+                <li><a href="spiele.html">Spiele Entwicklung</a></li>
+                <li><a href="schulprojekte.html">Schulische Projekte</a></li>
+                <li><a href="privateprojekte.html">Private Projekte</a></li>
+              </ul>
+            </li>
+            <li class="menu-item"><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+    
+      <!-- Hier kommt der Gradient-Balken -->
+      <div class="gradient-bar"></div>
+
+      <!-- Dynamische Begrüßung -->
+      <div style="text-align: start; color: white; margin-block-start: 20px;">
+        <h1 id="begruesstext"></h1> <!-- Dynamische Begrüßung wird hier angezeigt -->
+        <br>
+        <section id="news-container">
+          <!-- Hier werden die Nachrichten angezeigt -->
+        </section>
+      </div>
+      
+    </div>
+
+    <div class="side-strip"></div> <!-- Rechter Streifen -->
+  </div>
+  <script src="news.js"></script>
+</body>
+</html>
