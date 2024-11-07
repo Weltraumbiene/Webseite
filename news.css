@@ -3,12 +3,12 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #323232;
 }
 
 header {
     background-color: #333;
-    color: #fff;
+    color: #525252;
     padding: 1rem;
     text-align: start; /* bleibt so für die Ausrichtung des Headers */
 }
@@ -16,16 +16,15 @@ header {
 #news-container {
     padding: 20px;
     max-inline-size: 800px;
-    margin: 20px 0; /* Entfernt das zentrale Margin und lässt es linksbündig */
-    background-color: #3b3b3b;
+    background-color: #000000;
     text-align: start; /* Text im Container nach links ausrichten */
 }
 
 article {
     margin-block-end: 20px;
     padding: 15px;
-    background-color: #3b3b3b;
-    border-inline-start: 5px solid #3b3b3b;
+    background-color: #000000;
+    border-inline-start: 5px solid #000000;
     text-align: start; /* Sorgt dafür, dass der Text in den Artikeln auch links ausgerichtet ist */
 }
 

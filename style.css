@@ -250,3 +250,40 @@ a:hover {
   block-size: auto;
   border-radius: 10px;
 }
+
+#news-container {
+  color: #b0b0b0; /* Schriftfarbe */
+  background-color: rgba(0, 0, 0, 0.7); /* Hintergrundfarbe */
+  padding: 20px; /* Innenabstand */
+  margin-top: 20px; /* Abstand zum Begrüßungstext */
+  border-radius: 5px; /* Abgerundete Ecken */
+  border: 1px solid #555; /* Rand */
+  width: 50%; /* 50% der Bildschirmbreite */
+  box-sizing: border-box; /* Stellt sicher, dass Padding und Border in der Breite enthalten sind */
+  text-align: left; /* Text im Container wird links ausgerichtet */
+  float: left; /* Container links ausrichten */
+}
+
+/* Für mobile Geräte und kleinere Bildschirme */
+@media (max-width: 768px) {
+  #news-container {
+      width: 90%; /* Auf kleineren Geräten 90% der Breite */
+  }
+}
+
+
+#news-container article {
+  margin-bottom: 20px; /* Abstand zwischen den News-Posts */
+  padding-bottom: 10px; /* Abstand innen im Artikel */
+  border-bottom: 1px solid #444; /* Trennstrich */
+}
+
+#news-container h2 {
+  color: #f0f0f0; /* Eine kontrastreiche Farbe für die Überschrift */
+  font-size: 1.5em; /* Etwas größere Schrift für die Titel */
+}
+
+#news-container p {
+  color: #d0d0d0; /* Dezenter Farbton für normalen Text */
+  line-height: 1.6; /* Zeilenabstand für bessere Lesbarkeit */
+}
