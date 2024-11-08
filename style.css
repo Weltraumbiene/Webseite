@@ -2,28 +2,26 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Box-Sizing angepasst */
 }
 
-body, html {
+html, body {
+  inline-size: 100vw;
+  block-size: 100vh;
+  margin: 0;
+  background-color: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
-  block-size: 100%;
-  background-color: #000000;
   font-family: 'Calibri', Helvetica, Arial, sans-serif;
+  overflow: hidden; /* Verhindert Scrollleisten */
 }
 
 .layout {
   display: flex;
   inline-size: 100vw;
   block-size: 100vh;
-}
-
-.side-strip {
-  background-color: #323232;
-  inline-size: 5%;
-  block-size: auto%;
+  background-color: #444;
 }
 
 .main-content {
@@ -33,6 +31,8 @@ body, html {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
+  block-size: auto;
+  margin: 0 auto; /* Horizontales Zentrieren */
 }
 
 .header {
@@ -141,19 +141,25 @@ body, html {
 
 .project {
   display: flex;
-  flex-direction: column; /* Bilder Ã¼ber Text */
+  flex-direction: column; /* Bilder über Text */
   align-items: center;
-  inline-size: 30%; /* Breite fÃ¼r die einzelnen Projekte */
+  inline-size: 30%; /* Breite für die einzelnen Projekte */
   background-color: #000000;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
+  transition: background-color 0.3s ease;
+  color: #ffffff; /* Schriftfarbe für den Link */
+}
+
+.project:hover {
+  background-color: #1c1c1c; /* Hintergrundfarbe bei Hover */
 }
 
 .project img {
   inline-size: 100%; /* Bildbreite anpassen */
-  block-size: auto; /* HÃ¶he automatisch */
+  block-size: auto; /* Höhe automatisch */
   border-radius: 10px;
   margin-block-end: 10px; /* Abstand zwischen Bild und Text */
 }
@@ -173,117 +179,81 @@ p {
 /* Links */
 a {
   color: gray;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:hover {
   color: #ffffff;
 }
 
-.project {
-  display: flex;
-  flex-direction: column; /* Bilder über Text */
-  align-items: center;
-  inline-size: 30%; /* Breite für die einzelnen Projekte */
-  background-color: #000000;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  text-align: center;
-  text-decoration: none; /* Keine Unterstreichung im Link */
-  color: #ffffff; /* Schriftfarbe für den Link */
-  transition: background-color 0.3s ease; /* Übergang für den Hover-Effekt */
-}
-
-.project:hover {
-  background-color: #1c1c1c; /* Hintergrundfarbe bei Hover */
-}
-
-.project img {
-  inline-size: 100%; /* Bildbreite anpassen */
-  block-size: auto; /* Höhe automatisch */
-  border-radius: 10px;
-  margin-block-end: 10px; /* Abstand zwischen Bild und Text */
-}
-
-/* Container für den Text und das Bild */
 .about-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 30px;
-  background-color: #131313; /* Dunkelgrauer Hintergrund */
-  border-radius: 15px; /* Abgerundete Ecken für den Container */
+  background-color: #131313;
+  border-radius: 15px;
 }
 
-/* Text Styling */
 .about-text {
-  inline-size: 50%; /* Der Text nimmt 65% des Containers ein */
+  inline-size: 50%;
   color: #ffffff;
   font-size: 16px;
   line-height: 1.8;
-  text-align: start; /* Text wird linksbündig geschrieben */
-  padding-inline-end: 20px; /* Abstand zwischen Text und Bild */
+  text-align: start;
+  padding-inline-end: 20px;
 }
 
-/* Bild Styling */
 .about-image {
-  inline-size: 30%; /* Das Bild nimmt 30% des Containers ein */
+  inline-size: 30%;
   display: flex;
   justify-content: flex-start;
 }
 
 .profile-img {
-  inline-size: 65%; /* Bild nimmt die gesamte Breite der Image-Section ein */
+  inline-size: 65%;
   block-size: auto;
-  border-radius: 25px; /* Abgerundete Ecken für das Bild */
+  border-radius: 25px;
 }
 
-/* Signatur Styling */
 .signature {
   text-align: start;
   margin-block-start: 20px;
 }
 
 .signature-img {
-  inline-size: 120px; /* Größe der Signatur */
+  inline-size: 120px;
   block-size: auto;
   border-radius: 10px;
 }
 
 #news-container {
-  color: #b0b0b0; /* Schriftfarbe */
-  background-color: rgba(0, 0, 0, 0.7); /* Hintergrundfarbe */
-  padding: 20px; /* Innenabstand */
-  margin-top: 20px; /* Abstand zum Begrüßungstext */
-  border-radius: 5px; /* Abgerundete Ecken */
-  border: 1px solid #555; /* Rand */
-  width: 50%; /* 50% der Bildschirmbreite */
-  box-sizing: border-box; /* Stellt sicher, dass Padding und Border in der Breite enthalten sind */
-  text-align: left; /* Text im Container wird links ausgerichtet */
-  float: left; /* Container links ausrichten */
-}
-
-/* Für mobile Geräte und kleinere Bildschirme */
-@media (max-width: 768px) {
-  #news-container {
-      width: 90%; /* Auf kleineren Geräten 90% der Breite */
-  }
+  color: #b0b0b0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 5px;
+  border: 1px solid #555;
+  inline-size: 50%;
+  box-sizing: border-box;
+  text-align: start;
+  max-block-size: 600px; /* Maximale Höhe des Containers */
+  overflow-y: auto; /* Vertikales Scrollen aktivieren */
 }
 
 
 #news-container article {
-  margin-bottom: 20px; /* Abstand zwischen den News-Posts */
-  padding-bottom: 10px; /* Abstand innen im Artikel */
-  border-bottom: 1px solid #444; /* Trennstrich */
+  margin-block-end: 20px;
+  padding-block-end: 10px;
+  border-block-end: 1px solid #444;
 }
 
 #news-container h2 {
-  color: #f0f0f0; /* Eine kontrastreiche Farbe für die Überschrift */
-  font-size: 1.5em; /* Etwas größere Schrift für die Titel */
+  color: #f0f0f0;
+  font-size: 1.5em;
 }
 
 #news-container p {
-  color: #d0d0d0; /* Dezenter Farbton für normalen Text */
-  line-height: 1.6; /* Zeilenabstand für bessere Lesbarkeit */
+  color: #d0d0d0;
+  line-height: 1.6;
 }
