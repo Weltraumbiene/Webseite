@@ -1,23 +1,28 @@
 [
+  {
+    "title": "So schön neu!",
+    "date": "2024-11-09",
+    "content": "Ich habe das CSS Layout vereinfacht und insgesamt flüssiger gestaltet."
+  },
     {
       "title": "Up to Date!",
       "date": "2024-11-07",
-      "content": "Die Begrüßungs-News habe ich für die Wartbarkeit\nauf JSON/JS umgestellt."
+      "content": "Die Begrüßungs-News habe ich für die Wartbarkeit auf JSON/JS umgestellt. Später ist eine Datenbankanbindung denkbar, aber gegenwärtig benutze ich Free Space ohne Serverunterstützung. Man muss Kompromisse machen, wenn man geizig ist."
     },
     {
       "title": "Cowllector jetzt auch im Browser spielbar!",
       "date": "2024-11-07",
-      "content": "Nach einiger Überlegung habe ich mich entschieden,\nGameMaker hinter mir zu lassen und die Anwendung vollständig\nin JavaScript zu entwickeln.\n\nZwar musste ich bei Null anfangen, da GameMaker und JavaScript\nwenig gemeinsam haben, aber schließlich habe ich eine funktionierende\nGrundstruktur für die Engine geschaffen.\n\nEs fehlen noch einige Features, wie zum Beispiel eine Menüführung\nund ein Highscore-System – aber das kommt alles nach und nach!"
+      "content": "Nach einiger Überlegung habe ich mich entschieden, GameMaker hinter mir zu lassen und die Anwendung vollständig in JavaScript zu entwickeln.Zwar musste ich bei Null anfangen, da GameMaker und JavaScript wenig gemeinsam haben, aber schließlich habe ich eine funktionierende Grundstruktur für die Engine geschaffen. Es fehlen noch einige Features, wie zum Beispiel eine Menüführung und ein Highscore-System, aber das kommt alles nach und nach!"
     },
     {
       "title": "Neues Feature in Arbeit",
       "date": "2024-10-30",
-      "content": "Es gibt ein neues Feature, an dem ich arbeite!\n\nZwar gab es einige technische Herausforderungen\nund ich bin auch zeitlich stark eingespannt,\naber ich bin zuversichtlich, dass es bald fertig ist.\n\nGeduld zahlt sich aus!"
+      "content": "Es gibt ein neues Feature, an dem ich arbeite! Zwar gab es einige technische Herausforderungen und ich bin auch zeitlich stark eingespannt, aber ich bin zuversichtlich, dass es bald fertig ist. Geduld zahlt sich aus!"
     },
     {
       "title": "Here we are!",
       "date": "2024-09-23",
-      "content": "Das Layout für die Seite ist jetzt fertiggestellt!\n\nIch nenne die erste Version mal liebevoll Version 1.01,\nund die Webseite ist nun online."
+      "content": "Das Layout für die Seite ist jetzt fertiggestellt!\n\nIch nenne die erste Version mal liebevoll Version 1.01 und die Webseite ist nun online."
     }
   ]
   

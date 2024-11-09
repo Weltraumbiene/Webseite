@@ -15,7 +15,7 @@ header {
 
 #news-container {
     padding: 20px;
-    max-inline-size: 800px;
+    max-inline-size: 400px;
     background-color: #000000;
     text-align: start; /* Text im Container nach links ausrichten */
 }

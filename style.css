@@ -237,7 +237,7 @@ a:hover {
   inline-size: 50%;
   box-sizing: border-box;
   text-align: start;
-  max-block-size: 600px; /* Maximale Höhe des Containers */
+  max-block-size: 500px; /* Maximale Höhe des Containers */
   overflow-y: auto; /* Vertikales Scrollen aktivieren */
 }
 
