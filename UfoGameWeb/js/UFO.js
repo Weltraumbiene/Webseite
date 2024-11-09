@@ -22,9 +22,16 @@ class UFO {
 
     // Diese Methode bewegt das UFO basierend auf der Geschwindigkeit dx und dy
     move() {
-        // Bewegt das UFO basierend auf der Geschwindigkeit in x- und y-Richtung
+        // Bewege das UFO basierend auf der Geschwindigkeit in x- und y-Richtung
         this.x += this.dx;
         this.y += this.dy;
+    
+        // Begrenze das UFO innerhalb des Canvas:
+        // Canvas-Größe: 1000x500
+        if (this.x < 0) this.x = 0; // Verhindert, dass das UFO links aus dem Canvas herausgeht
+        if (this.x > 1000 - this.width) this.x = 1000 - this.width; // Verhindert, dass das UFO rechts aus dem Canvas herausgeht
+        if (this.y < 0) this.y = 0; // Verhindert, dass das UFO oben aus dem Canvas herausgeht
+        if (this.y > 500 - this.height) this.y = 500 - this.height; // Verhindert, dass das UFO unten aus dem Canvas herausgeht
     }
 
     // Diese Methode zeichnet das UFO auf dem Canvas
