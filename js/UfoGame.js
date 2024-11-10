@@ -11,6 +11,9 @@ class UfoGame {
         this.showGameOverMessage = false;
         this.cowsCollected = 0;
 
+        // Gegner-Verwaltung
+        this.gegner = new Gegner(this);
+
         // Hintergrundbild
         this.background = new Image();
         this.background.src = 'images/background.png';
@@ -63,6 +66,7 @@ class UfoGame {
                     this.kuehe.splice(index, 1);
                     this.spawnKuh();
                     this.cowsCollected += 1;
+                    this.checkKuhSammlung(); // Überprüfen, ob die 15 Kühe erreicht wurden
                 }
             });
         }
@@ -125,7 +129,8 @@ class UfoGame {
         this.gameOver = false;
         this.showGameOverMessage = false;
 
-        this.spawnTraktorMitZufallsIntervall();
+        // Gegner-Starten
+        this.gegner.spawnTraktorMitZufallsIntervall();
         this.spawnKuh();
     }
 
@@ -143,25 +148,13 @@ class UfoGame {
             this.ufo.setDx(0);
             this.ufo.setDy(0);
 
-            clearTimeout(this.traktorSpawnInterval);
+            this.gegner.stopTraktorSpawnen();
 
-            this.spawnTraktorMitZufallsIntervall();
+            this.gegner.spawnTraktorMitZufallsIntervall();
             this.spawnKuh();
 
             this.gameLoop = setInterval(() => this.update(), 15);
         }
-    }
-
-    spawnTraktorMitZufallsIntervall() {
-        this.spawnTraktoren();
-        const zufallsIntervall = 2000 + Math.random() * 3000;
-        this.traktorSpawnInterval = setTimeout(() => this.spawnTraktorMitZufallsIntervall(), zufallsIntervall);
-    }
-
-    spawnTraktoren() {
-        let x = -50;
-        let y = 410 + Math.random() * 45;
-        this.traktoren.push(new Traktor(x, y));
     }
 
     spawnKuh() {
@@ -169,6 +162,14 @@ class UfoGame {
         let y = 425 + Math.random() * 40;
         this.kuehe.push(new Kuh(x, y));
     }
+
+    checkKuhSammlung() {
+        // Wenn der Spieler 15 Kühe gesammelt hat, erhöhe die Traktor-Spawnrate
+        if (this.cowsCollected === 15) {
+            this.gegner.increaseTraktorSpawnRate();
+        }
+    }
 }
+
 
 const game = new UfoGame();
