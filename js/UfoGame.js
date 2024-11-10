@@ -5,6 +5,7 @@ class UfoGame {
         this.ctx = this.canvas.getContext('2d');
         this.ufo = new UFO(300, 100);
         this.traktoren = [];
+        this.traktorRechts = [];
         this.kuehe = [];
         this.explosions = [];
         this.gameOver = false;
@@ -57,6 +58,24 @@ class UfoGame {
                 }
             });
 
+            // Traktor von rechts
+            this.traktorRechts.forEach((traktorRechts, index) => {
+                traktorRechts.move();
+
+                // Kollisionsprüfung mit UFO
+                if (traktorRechts.collidesWith(this.ufo)) {
+                    this.explosions.push(new Explosion(this.ufo.x, this.ufo.y));
+                    this.gameOver = true;
+                    setTimeout(() => {
+                        this.showGameOverMessage = true;
+                    }, 1500);
+                }
+
+                if (traktorRechts.x < -50) { // Wenn der Traktor aus dem Bildschirm links verschwindet
+                    this.traktorRechts.splice(index, 1); // Entfernen
+                }
+            });
+
             // Explosionen aktualisieren
             this.explosions = this.explosions.filter(explosion => !explosion.isComplete());
 
@@ -66,7 +85,7 @@ class UfoGame {
                     this.kuehe.splice(index, 1);
                     this.spawnKuh();
                     this.cowsCollected += 1;
-                    this.checkKuhSammlung(); // Überprüfen, ob die 15 Kühe erreicht wurden
+                    this.checkKuhSammlung(); // Überprüfen, ob die 30 Kühe erreicht wurden
                 }
             });
         }
@@ -84,6 +103,7 @@ class UfoGame {
         // Zeichne Traktoren und Kühe
         if (!this.gameOver) {
             this.traktoren.forEach(traktor => traktor.draw(this.ctx));
+            this.traktorRechts.forEach(traktorRechts => traktorRechts.draw(this.ctx));
             this.kuehe.forEach(kuh => kuh.draw(this.ctx));
         }
 
@@ -123,6 +143,7 @@ class UfoGame {
     startGame() {
         this.ufo = new UFO(300, 100);
         this.traktoren = [];
+        this.traktorRechts = [];
         this.kuehe = [];
         this.explosions = [];
         this.cowsCollected = 0;
@@ -131,6 +152,7 @@ class UfoGame {
 
         // Gegner-Starten
         this.gegner.spawnTraktorMitZufallsIntervall();
+        this.gegner.spawnTraktorRechtsMitZufallsIntervall();
         this.spawnKuh();
     }
 
@@ -142,6 +164,7 @@ class UfoGame {
             this.showGameOverMessage = false;
             this.cowsCollected = 0;
             this.traktoren = [];
+            this.traktorRechts = [];
             this.kuehe = [];
             this.explosions = [];
             this.ufo = new UFO(300, 100);
@@ -151,7 +174,11 @@ class UfoGame {
             this.gegner.stopTraktorSpawnen();
             this.gegner.resetTraktorSpawnRate(); // Reset der Spawnrate
 
+            this.gegner.stopTraktorRechtsSpawnen();
+            this.gegner.resetTraktorRechtsSpawnRate();
+
             this.gegner.spawnTraktorMitZufallsIntervall();
+            this.gegner.spawnTraktorRechtsMitZufallsIntervall();
             this.spawnKuh();
 
             this.gameLoop = setInterval(() => this.update(), 15);
@@ -165,9 +192,11 @@ class UfoGame {
     }
 
     checkKuhSammlung() {
-        // Wenn der Spieler 15 Kühe gesammelt hat, erhöhe die Traktor-Spawnrate
-        if (this.cowsCollected === 5) {
+        if (this.cowsCollected === 10) {
             this.gegner.increaseTraktorSpawnRate();
+        }
+        if (this.cowsCollected === 30) {
+            this.gegner.increaseTraktorRechtsSpawnRate();
         }
     }
 }
