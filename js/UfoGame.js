@@ -149,6 +149,7 @@ class UfoGame {
             this.ufo.setDy(0);
 
             this.gegner.stopTraktorSpawnen();
+            this.gegner.resetTraktorSpawnRate(); // Reset der Spawnrate
 
             this.gegner.spawnTraktorMitZufallsIntervall();
             this.spawnKuh();
@@ -165,11 +166,10 @@ class UfoGame {
 
     checkKuhSammlung() {
         // Wenn der Spieler 15 Kühe gesammelt hat, erhöhe die Traktor-Spawnrate
-        if (this.cowsCollected === 15) {
+        if (this.cowsCollected === 5) {
             this.gegner.increaseTraktorSpawnRate();
         }
     }
 }
-
 
 const game = new UfoGame();

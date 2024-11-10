@@ -25,4 +25,9 @@ class Gegner {
         // Reduziere das Intervall auf 2000-3000 Millisekunden, wenn 15 Kühe gesammelt wurden
         this.spawnRate = { min: 2000, max: 3000 };
     }
+
+    resetTraktorSpawnRate() {
+        // Setze die Spawnrate zurück auf die Anfangswerte
+        this.spawnRate = { min: 3000, max: 4000 };
+    }
 }
