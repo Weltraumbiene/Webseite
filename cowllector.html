@@ -12,18 +12,18 @@
 </head>
 <body>
 
-  <!-- Zentraler Inhaltsbereich -->
+  <!-- Graue Balken -->
   <div class="layout">
-    <div class="side-strip"></div> <!-- Linker Streifen -->
+    <div class="side-strip"></div>
 
     <div class="main-content">
-      <!-- Logo hinzufügen -->
+      <!-- Logo Links -->
       <div class="header">
         <a href="index.html">
             <img src="images/bclogoBG.jpg" alt="BC Logo" class="logo">
         </a>
         
-        <!-- Navigation -->
+        <!-- Navigation - Nicht ändern! -->
         <nav>
           <ul class="menu">
             <li class="menu-item"><a href="index.html">Start</a></li>
@@ -41,21 +41,30 @@
         </nav>
       </div>
     
-      <!-- Hier kommt der Gradient-Balken -->
+      <!-- Inhalt der Seite ab hier -->
       <div class="gradient-bar"></div>
-<!-- Dynamische Begrüßung-->
- <br>
- <iframe src="\UfoGameWeb\index.html" width="1000" height="500" frameborder="0" allowfullscreen style="border: 5px solid #333; border-radius: 10px;"></iframe>
-<br>
-<br>
-<br>
-<br>
-<p>Click on the game with your mouse and use 'W A S D' to navigate</p>
-      
-    </div>
-
-    <div class="side-strip"></div> <!-- Rechter Streifen -->
-  </div>
-
+      <br>
+      <style>
+        canvas {
+            padding-inline-start: 0;
+            padding-inline-end: 0;
+            margin-inline-start: auto;
+            margin-inline-end: auto;
+            display: block;
+            display: block; 
+            background-color: black;
+            border: 3px solid #3b3b3b;
+            border-radius: 15px; 
+        }
+    </style>
+    
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <script src="js/UFO.js"></script>
+    <script src="js/Kuh.js"></script>
+    <script src="js/Traktor.js"></script>
+    <script src="js/Explosion.js"></script>
+    <script src="js/UfoGame.js"></script>
 </body>
 </html>

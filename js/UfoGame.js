@@ -1,6 +1,6 @@
-// UfoGame.js
 class UfoGame {
     constructor() {
+        // Canvas und Startwerte
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
         this.ufo = new UFO(300, 100);
@@ -11,38 +11,36 @@ class UfoGame {
         this.showGameOverMessage = false;
         this.cowsCollected = 0;
 
+        // Hintergrundbild
         this.background = new Image();
         this.background.src = 'images/background.png';
 
+        // Canvas-Größe
         this.canvas.width = 1000;
         this.canvas.height = 500;
 
-        // GameMenu-Instanz erstellen
-        this.menu = new GameMenu(this.ctx, this.canvas);
-        this.isMenu = true; // Zustand für Menü anzeigen
-
-        // Event-Listener hinzufügen
+        // Event-Listener
         document.addEventListener('keydown', (e) => this.keyPressed(e));
         document.addEventListener('keyup', (e) => this.keyReleased(e));
         document.addEventListener('keydown', (e) => this.restartGame(e));
 
+        // Startet das Spiel
         this.gameLoop = setInterval(() => this.update(), 15);
+
+        // Initialisiert das Spiel
+        this.startGame();
     }
 
     update() {
-        // Menü anzeigen, wenn isMenu auf true gesetzt ist
-        if (this.isMenu) {
-            this.menu.drawMenu();
-            return;
-        }
-
-        // Aktualisierungen im Spielzustand
         if (!this.gameOver) {
+            // UFO-Bewegung
             this.ufo.move();
 
+            // Traktoren
             this.traktoren.forEach((traktor, index) => {
                 traktor.move();
 
+                // Kollisionsprüfung mit UFO
                 if (traktor.collidesWith(this.ufo)) {
                     this.explosions.push(new Explosion(this.ufo.x, this.ufo.y));
                     this.gameOver = true;
@@ -52,12 +50,14 @@ class UfoGame {
                 }
 
                 if (traktor.x > this.canvas.width) {
-                    this.traktoren.splice(index, 1);
+                    this.traktoren.splice(index, 1); // Entferne den Traktor, wenn er aus dem Bildschirm ist
                 }
             });
 
+            // Explosionen aktualisieren
             this.explosions = this.explosions.filter(explosion => !explosion.isComplete());
 
+            // Kühe prüfen und sammeln
             this.kuehe.forEach((kuh, index) => {
                 if (this.ufo.collidesWith(kuh)) {
                     this.kuehe.splice(index, 1);
@@ -66,28 +66,32 @@ class UfoGame {
                 }
             });
         }
-
         this.draw();
     }
 
     draw() {
         this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
 
+        // Zeichne UFO, wenn kein Game Over
         if (!this.showGameOverMessage && !this.gameOver) {
             this.ufo.draw(this.ctx);
         }
 
+        // Zeichne Traktoren und Kühe
         if (!this.gameOver) {
             this.traktoren.forEach(traktor => traktor.draw(this.ctx));
             this.kuehe.forEach(kuh => kuh.draw(this.ctx));
         }
 
+        // Explosionen anzeigen
         this.explosions.forEach(explosion => explosion.draw(this.ctx));
 
+        // Anzeigen von gesammelten Kühen
         this.ctx.fillStyle = "white";
         this.ctx.font = "20px Arial";
         this.ctx.fillText("Collected Cows: " + this.cowsCollected.toString().padStart(3, '0'), this.canvas.width - 200, 30);
 
+        // Game Over Nachricht
         if (this.showGameOverMessage) {
             this.ctx.fillStyle = "#00FF00";
             this.ctx.font = "bold 30px 'Press Start 2P', Courier, sans-serif";
@@ -99,13 +103,7 @@ class UfoGame {
     }
 
     keyPressed(e) {
-        if (this.isMenu) {
-            const selectedOption = this.menu.handleKeyPress(e);
-            if (selectedOption === "Start Game") {
-                this.startGame();
-            }
-            // Weitere Optionen wie "Story", "Controls" können hier hinzugefügt werden
-        } else if (!this.gameOver) {
+        if (!this.gameOver) {
             if (e.key === 'w') this.ufo.setDy(-5);
             if (e.key === 's') this.ufo.setDy(5);
             if (e.key === 'a') this.ufo.setDx(-5);
@@ -119,7 +117,6 @@ class UfoGame {
     }
 
     startGame() {
-        this.isMenu = false;
         this.ufo = new UFO(300, 100);
         this.traktoren = [];
         this.kuehe = [];
