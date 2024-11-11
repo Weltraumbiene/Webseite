@@ -3,8 +3,9 @@ class Gegner {
         this.game = game;
         this.traktorSpawnInterval = null;
         this.traktorRechtsSpawnInterval = null;
-        this.spawnRate = { min: 3000, max: 4000 }; // Anfangs-Spawnrate für Traktoren
-        this.spawnRateRechts = { min: 4000, max: 5000 }; // Anfangs-Spawnrate für Traktoren von rechts
+        this.redCowSpawnInterval = null; // Intervall für das Spawnen der Roten Kuh
+        this.spawnRate = { min: 5000, max: 6000 }; // Spawnrate für Traktoren von links
+        this.spawnRateRechts = { min: 4000, max: 5000 }; // Spawnrate für Traktoren von rechts
     }
 
     spawnTraktorMitZufallsIntervall() {
@@ -31,6 +32,29 @@ class Gegner {
         this.game.traktorRechts.push(new Traktor2(x, y));
     }
 
+    spawnRedCowWithRandomInterval() {
+        const interval = 10000 + Math.random() * 16000; // Spawnt alle 20–40 Sekunden
+        this.redCowSpawnInterval = setTimeout(() => {
+            this.spawnRedCow();
+            this.spawnRedCowWithRandomInterval(); // Nächstes Spawnen der Roten Kuh planen
+        }, interval);
+    }
+
+    spawnRedCow() {
+        let x = 50 + Math.random() * 900;
+        let y = 425 + Math.random() * 40;
+        const redCow = new RedCow(x, y);
+        this.game.redCows.push(redCow);
+
+        // Rote Kuh bleibt für 5 Sekunden sichtbar und wird danach entfernt
+        setTimeout(() => {
+            const index = this.game.redCows.indexOf(redCow);
+            if (index > -1) {
+                this.game.redCows.splice(index, 1);
+            }
+        }, 5000);
+    }
+
     stopTraktorSpawnen() {
         clearTimeout(this.traktorSpawnInterval);
     }
@@ -39,8 +63,11 @@ class Gegner {
         clearTimeout(this.traktorRechtsSpawnInterval);
     }
 
+    stopRedCowSpawning() {
+        clearTimeout(this.redCowSpawnInterval);
+    }
+
     increaseTraktorSpawnRate() {
-        // Reduziere das Intervall für Traktoren von links
         this.spawnRate = { min: 2000, max: 3000 };
     }
 
@@ -49,7 +76,6 @@ class Gegner {
     }
 
     increaseTraktorRechtsSpawnRate() {
-        // Reduziere das Intervall für Traktoren von rechts
         this.spawnRateRechts = { min: 3000, max: 4000 };
     }
 

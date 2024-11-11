@@ -1,91 +1,87 @@
 class UfoGame {
     constructor() {
-        // Canvas und Startwerte
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
         this.ufo = new UFO(300, 100);
         this.traktoren = [];
         this.traktorRechts = [];
         this.kuehe = [];
+        this.redCows = [];
         this.explosions = [];
         this.gameOver = false;
         this.showGameOverMessage = false;
         this.cowsCollected = 0;
 
-        // Gegner-Verwaltung
+        // Gegner-Management
         this.gegner = new Gegner(this);
 
         // Hintergrundbild
         this.background = new Image();
         this.background.src = 'images/background.png';
 
-        // Canvas-Größe
         this.canvas.width = 1000;
         this.canvas.height = 500;
 
-        // Event-Listener
         document.addEventListener('keydown', (e) => this.keyPressed(e));
         document.addEventListener('keyup', (e) => this.keyReleased(e));
         document.addEventListener('keydown', (e) => this.restartGame(e));
 
-        // Startet das Spiel
         this.gameLoop = setInterval(() => this.update(), 15);
-
-        // Initialisiert das Spiel
         this.startGame();
     }
 
     update() {
         if (!this.gameOver) {
-            // UFO-Bewegung
             this.ufo.move();
 
-            // Traktoren
             this.traktoren.forEach((traktor, index) => {
                 traktor.move();
-
-                // Kollisionsprüfung mit UFO
                 if (traktor.collidesWith(this.ufo)) {
                     this.explosions.push(new Explosion(this.ufo.x, this.ufo.y));
                     this.gameOver = true;
                     setTimeout(() => {
                         this.showGameOverMessage = true;
-                    }, 1500);
+                    }, 100);
                 }
-
                 if (traktor.x > this.canvas.width) {
-                    this.traktoren.splice(index, 1); // Entferne den Traktor, wenn er aus dem Bildschirm ist
+                    this.traktoren.splice(index, 1);
                 }
             });
 
-            // Traktor von rechts
-            this.traktorRechts.forEach((traktorRechts, index) => {
-                traktorRechts.move();
+            if (this.cowsCollected >= 2) {
+                this.traktorRechts.forEach((traktorRechts, index) => {
+                    traktorRechts.move();
+                    if (traktorRechts.collidesWith(this.ufo)) {
+                        this.explosions.push(new Explosion(this.ufo.x, this.ufo.y));
+                        this.gameOver = true;
+                        setTimeout(() => {
+                            this.showGameOverMessage = true;
+                        }, 1500);
+                    }
+                    if (traktorRechts.x < -50) {
+                        this.traktorRechts.splice(index, 1);
+                    }
+                });
+            }
 
-                // Kollisionsprüfung mit UFO
-                if (traktorRechts.collidesWith(this.ufo)) {
+            this.redCows.forEach((redCow, index) => {
+                if (this.ufo.collidesWith(redCow)) {
                     this.explosions.push(new Explosion(this.ufo.x, this.ufo.y));
                     this.gameOver = true;
                     setTimeout(() => {
                         this.showGameOverMessage = true;
-                    }, 1500);
-                }
-
-                if (traktorRechts.x < -50) { // Wenn der Traktor aus dem Bildschirm links verschwindet
-                    this.traktorRechts.splice(index, 1); // Entfernen
+                    }, 100);
                 }
             });
 
-            // Explosionen aktualisieren
             this.explosions = this.explosions.filter(explosion => !explosion.isComplete());
 
-            // Kühe prüfen und sammeln
             this.kuehe.forEach((kuh, index) => {
                 if (this.ufo.collidesWith(kuh)) {
                     this.kuehe.splice(index, 1);
                     this.spawnKuh();
                     this.cowsCollected += 1;
-                    this.checkKuhSammlung(); // Überprüfen, ob die 30 Kühe erreicht wurden
+                    this.checkKuhSammlung();
                 }
             });
         }
@@ -95,27 +91,20 @@ class UfoGame {
     draw() {
         this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
 
-        // Zeichne UFO, wenn kein Game Over
-        if (!this.showGameOverMessage && !this.gameOver) {
-            this.ufo.draw(this.ctx);
-        }
-
-        // Zeichne Traktoren und Kühe
         if (!this.gameOver) {
+            this.ufo.draw(this.ctx);
             this.traktoren.forEach(traktor => traktor.draw(this.ctx));
             this.traktorRechts.forEach(traktorRechts => traktorRechts.draw(this.ctx));
             this.kuehe.forEach(kuh => kuh.draw(this.ctx));
+            this.redCows.forEach(redCow => redCow.draw(this.ctx));
         }
 
-        // Explosionen anzeigen
         this.explosions.forEach(explosion => explosion.draw(this.ctx));
 
-        // Anzeigen von gesammelten Kühen
         this.ctx.fillStyle = "white";
         this.ctx.font = "20px Arial";
-        this.ctx.fillText("Collected Cows: " + this.cowsCollected.toString().padStart(3, '0'), this.canvas.width - 200, 30);
+        this.ctx.fillText(`Collected Cows: ${this.cowsCollected.toString().padStart(3, '0')}`, this.canvas.width - 200, 30);
 
-        // Game Over Nachricht
         if (this.showGameOverMessage) {
             this.ctx.fillStyle = "#00FF00";
             this.ctx.font = "bold 30px 'Press Start 2P', Courier, sans-serif";
@@ -136,24 +125,14 @@ class UfoGame {
     }
 
     keyReleased(e) {
-        if (e.key === 'w' || e.key === 's') this.ufo.setDy(0);
-        if (e.key === 'a' || e.key === 'd') this.ufo.setDx(0);
+        if (['w', 's'].includes(e.key)) this.ufo.setDy(0);
+        if (['a', 'd'].includes(e.key)) this.ufo.setDx(0);
     }
 
     startGame() {
-        this.ufo = new UFO(300, 100);
-        this.traktoren = [];
-        this.traktorRechts = [];
-        this.kuehe = [];
-        this.explosions = [];
-        this.cowsCollected = 0;
-        this.gameOver = false;
-        this.showGameOverMessage = false;
-
-        // Gegner-Starten
         this.gegner.spawnTraktorMitZufallsIntervall();
-        this.gegner.spawnTraktorRechtsMitZufallsIntervall();
         this.spawnKuh();
+        // Spawn anderer Einheiten wird nicht automatisch gestartet, sondern durch checkKuhSammlung aktiviert
     }
 
     restartGame(e) {
@@ -166,21 +145,18 @@ class UfoGame {
             this.traktoren = [];
             this.traktorRechts = [];
             this.kuehe = [];
+            this.redCows = [];
             this.explosions = [];
             this.ufo = new UFO(300, 100);
             this.ufo.setDx(0);
             this.ufo.setDy(0);
 
             this.gegner.stopTraktorSpawnen();
-            this.gegner.resetTraktorSpawnRate(); // Reset der Spawnrate
-
-            this.gegner.stopTraktorRechtsSpawnen();
+            this.gegner.stopRedCowSpawning();
+            this.gegner.resetTraktorSpawnRate();
             this.gegner.resetTraktorRechtsSpawnRate();
 
-            this.gegner.spawnTraktorMitZufallsIntervall();
-            this.gegner.spawnTraktorRechtsMitZufallsIntervall();
-            this.spawnKuh();
-
+            this.startGame();
             this.gameLoop = setInterval(() => this.update(), 15);
         }
     }
@@ -192,11 +168,14 @@ class UfoGame {
     }
 
     checkKuhSammlung() {
-        if (this.cowsCollected === 10) {
+        if (this.cowsCollected === 15) {
             this.gegner.increaseTraktorSpawnRate();
         }
         if (this.cowsCollected === 30) {
-            this.gegner.increaseTraktorRechtsSpawnRate();
+            this.gegner.spawnRedCowWithRandomInterval();
+        }
+        if (this.cowsCollected === 45) {
+            this.gegner.spawnTraktorRechtsMitZufallsIntervall();
         }
     }
 }

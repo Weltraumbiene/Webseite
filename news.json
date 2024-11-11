@@ -1,5 +1,15 @@
 [
   {
+    "title": "Cowllector Update",
+    "date": "2024-11-10",
+    "content": "Um den Schwierigkeitsgrad in Collector zu erhöhen und das Spiel allgemein interessanter zu gestalten, habe ich bisher drei Stufen eingebaut. Nach dem Sammeln von 15 Kühen erhöht sich die Spawnrate der Traktoren; bei 30 gesammelten Kühen erscheint alle 15 bis 25 Sekunden zufällig eine rote Kuh, die bei Kollision das Spiel beendet; und nach 45 Kühen erscheinen Traktoren von rechts, was die Schwierigkeit deutlich steigert."
+  },
+  {
+    "title": "JavaScript ist die Pest!",
+    "date": "2024-11-10",
+    "content": "Am Wochenende habe ich süße 18 Stunden damit verbracht, ein Menü in JavaScript zu gestalten, das sich ums Verrecken nicht wie gewünscht in das Spiel integrieren ließ! Stattdessen habe ich es einfach sein lassen und mich um einen dynamischeren Spielablauf sowie steigende Schwierigkeitsgrade gekümmert."
+  },
+  {
     "title": "So schön neu!",
     "date": "2024-11-09",
     "content": "Ich habe das CSS Layout vereinfacht und insgesamt flüssiger gestaltet."
